@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMPORT AUTO - Авто из Китая и Кореи</title>
+    <style>
+        /* * ==========================================
+         * 1. CSS VARIABLES & THEME DEFINITIONS
+         * ==========================================
+         */
+        :root {
+            /* Background Colors */
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --dark-bg: #121212;
+            
+            /* Text Colors */
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --text-light: #ffffff;
+            
+            /* Brand Colors */
+            --accent-color: #e63946;
+            --accent-hover: #d62828;
+            --vk-color: #0077ff;
+            --tg-color: #0088cc;
+            
+            /* Borders and Shadows */
+            --border-light: #eeeeee;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+            
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sizing & Transitions */
+            --border-radius-sm: 8px;
+            --border-radius-md: 16px;
+            --border-radius-lg: 24px;
+            --transition-speed: 0.4s;
+            --transition-timing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* * ==========================================
+         * 2. RESET & BASE STYLES
+         * ==========================================
+         */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* * ==========================================
+         * 3. HEADER & NAVIGATION
+         * ==========================================
+         */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            transition: all var(--transition-speed);
+        }
+
+        .header__logo {transform: translateX(-30px); 
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            position: absolute;
+            left: 45%;
+            transform: translateX(-50%);
+            text-transform: uppercase;
+        }
+
+        .header__burger {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .header__burger:hover {
+            color: var(--accent-color);
+        }
+
+        .header__contacts {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header__phone {
+            font-weight: 700;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .header__phone:hover {
+            color: var(--accent-color);
+        }
+
+        /* * ==========================================
+         * 4. BUTTONS
+         * ==========================================
+         */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn--primary {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .btn--primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn--outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-light);
+        }
+
+        .btn--outline:hover {
+            border-color: var(--text-main);
+            background-color: var(--secondary-bg);
+        }
+
+        .btn--block {
+            width: 100%;
+        }
+
+        /* * ==========================================
+         * 5. SIDEBAR MENU
+         * ==========================================
+         */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 100%;
+            max-width: 380px;
+            height: 100vh;
+            background-color: var(--primary-bg);
+            z-index: 2000;
+            padding: 100px 30px 40px;
+            overflow-y: auto;
+            transition: left var(--transition-speed) var(--transition-timing);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar.is-open {
+            left: 0;
+        }
+
+        .sidebar__close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar__close:hover {
+            color: var(--accent-color);
+        }
+
+        .sidebar__nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .sidebar__link {
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 15px 20px;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar__link:hover {
+            background-color: var(--secondary-bg);
+            color: var(--accent-color);
+            padding-left: 25px;
+        }
+
+        .sidebar__info {
+            background-color: var(--secondary-bg);
+            padding: 25px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 20px;
+        }
+
+        .sidebar__info-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar__info-link {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .sidebar__social {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn--vk {
+            background-color: var(--vk-color);
+            color: white;
+        }
+
+        /* * ==========================================
+         * 6. OVERLAY
+         * ==========================================
+         */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* * ==========================================
+         * 7. HERO SECTION
+         * ==========================================
+         */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at right top, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .hero__content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero__title {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        .hero__subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            max-width: 650px;
+            line-height: 1.5;
+        }
+
+        .hero__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* * ==========================================
+         * 7.1 STAGES SECTION (ЭТАПЫ ДОСТАВКИ)
+         * ==========================================
+         */
+        .stages {
+            padding: 80px 5%;
+            background-color: var(--primary-bg);
+        }
+
+        .stages__title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: -1px;
+        }
+
+        .stages__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stage-card {
+            background-color: var(--secondary-bg);
+            padding: 40px 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: left;
+            position: relative;
+            border: 1px solid var(--border-light);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stage-card__num {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            opacity: 0.15;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            line-height: 1;
+        }
+
+        .stage-card__title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-card__desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* * ==========================================
+         * 7.2 FAQ SECTION (ВОПРОСЫ И ОТВЕТЫ)
+         * ==========================================
+         */
+        .faq {
+            padding: 80px 5%;
+            background-color: var(--secondary-bg);
+        }
+
+        .faq__title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: -1px;
+        }
+
+        .faq__grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-card {
+            background-color: var(--primary-bg);
+            padding: 35px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-speed) ease;
+        }
+
+        .faq-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-card__q {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .faq-card__q::before {
+            content: '?';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .faq-card__a {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            padding-left: 47px; /* Align with text, avoiding the question mark */
+        }
+
+        /* * ==========================================
+         * 8. CATALOG SECTION
+         * ==========================================
+         */
+        .catalog {
+            display: none;
+            padding: 120px 5% 80px;
+            background-color: var(--secondary-bg);
+            min-height: 100vh;
+        }
+
+        .catalog__header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .catalog__title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* * ==========================================
+         * 9. CAR CARD
+         * ==========================================
+         */
+        .card {
+            background-color: var(--primary-bg);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+/* Общий стиль для всех ярлыков */
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 12px;
+    border-radius: 20px; /* Скругляем края */
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* В НАЛИЧИИ — мягкий зеленый */
+.badge-available {
+    background-color: #2ecc71 !important;
+    color: white !important;
+}
+
+/* ПОД ЗАКАЗ — сдержанный красный или серый */
+.badge-order {
+    background-color: #e74c3c !important;
+    color: white !important;
+}
+}
+
+        .card__image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .card__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .card:hover .card__image {
+            transform: scale(1.05);
+        }
+
+        .card__badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .card__body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card__title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .card__desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        /* * ==========================================
+         * 10. MODAL WINDOWS
+         * ==========================================
+         */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal__container {
+            background-color: var(--primary-bg);
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal.is-open .modal__container {
+            transform: translateY(0);
+        }
+
+        .modal__container--large {
+            max-width: 900px;
+        }
+
+        .modal__close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal__close:hover {
+            color: var(--accent-color);
+        }
+
+        .modal__title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        /* * ==========================================
+         * 11. FORM ELEMENTS
+         * ==========================================
+         */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: var(--secondary-bg);
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            background-color: var(--primary-bg);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* * ==========================================
+         * 12. CALCULATOR SPECIFICS
+         * ==========================================
+         */
+        .calc-result {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: rgba(230, 57, 70, 0.05);
+            border: 2px dashed var(--accent-color);
+            border-radius: var(--border-radius-md);
+            text-align: center;
+        }
+
+        .calc-result__label {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .calc-result__value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-color);
+        }
+
+        /* * ==========================================
+         * 13. CAR DETAILS SPECIFICS
+         * ==========================================
+         */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spec-item__label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .spec-item__value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* * ==========================================
+         * 14. ANIMATIONS & UTILITIES
+         * ==========================================
+         */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--transition-timing);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* * ==========================================
+         * 15. FOOTER
+         * ==========================================
+         */
+        .footer {
+            padding: 80px 5% 40px;
+            background-color: var(--primary-bg);
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .footer__logo {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .footer__text {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .footer__copy {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* * ==========================================
+         * 16. RESPONSIVE DESIGN (MEDIA QUERIES)
+         * ==========================================
+         */
+        @media screen and (max-width: 992px) {
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            .faq-card__a {
+                padding-left: 0;
+                margin-top: 10px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .header__phone {
+                display: none;
+            }
+            .hero__title {
+                font-size: 3rem;
+            }
+            .sidebar {
+                max-width: 100%;
+                left: -100%;
+            }
+            .modal__container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header__burger" id="burgerBtn">
+            &#9776;
+        </div>
+        
+        <div class="header__logo">
+            IMPORT AUTO
+        </div>
+        
+        <div class="header__contacts">
+            <a href="tel:+79931427080" class="header__phone">
+                +7 (993) 142-70-80
+            </a>
+            <button class="btn btn--primary" id="headerCatalogBtn" style="padding: 10px 20px; font-size: 0.85rem;">
+                Каталог
+            </button>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar__close" id="sidebarClose">
+            &times;
+        </div>
+        
+        <nav class="sidebar__nav">
+            <a href="#" class="sidebar__link" id="navCatalogBtn">
+                Каталог автомобилей
+            </a>
+            <a href="#" class="sidebar__link" id="navCalcBtn">
+                Рассчитать утиль сбор
+            </a>
+            <a href="#" class="sidebar__link" id="navReqBtn">
+                Оставить заявку
+            </a>
+        </nav>
+        
+        <div class="sidebar__info">
+            <div class="sidebar__info-title">
+                Прямая связь с экспертом
+            </div>
+            <a href="https://t.me/Daster711" class="sidebar__info-link" target="_blank">
+                Telegram: @Daster711
+            </a>
+            <a href="tel:+79931427080" class="sidebar__info-link">
+                +7 (993) 142-70-80
+            </a>
+        </div>
+        
+        <div class="sidebar__social">
+            <a href="https://vk.ru/id1110305704" class="btn btn--vk btn--block" target="_blank">
+                Мы ВКонтакте
+            </a>
+        </div>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+        <section class="hero" id="heroSection">
+            <div class="hero__content">
+                <h1 class="hero__title reveal">
+                    Доставляем будущее <br>на ваши дороги.
+                </h1>
+                <p class="hero__subtitle reveal">
+                    Официальный импорт автомобилей из Китая, Южной Кореи и Европы. 
+                    Полное таможенное оформление под ключ. Честные цены без накруток 
+                    и скрытых комиссий. Мы заботимся о каждой детали вашей новой машины.
+                </p>
+                <div class="hero__actions reveal">
+                    <button class="btn btn--primary" id="heroReqBtn">
+                        Получить консультацию
+                    </button>
+                    <button class="btn btn--outline" id="heroCatalogBtn">
+                        Смотреть каталог
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="stages" id="stagesSection">
+            <h2 class="stages__title reveal">Как мы работаем</h2>
+            <div class="stages__grid">
+                <div class="stage-card reveal">
+                    <span class="stage-card__num">01</span>
+                    <h3 class="stage-card__title">Подбор и договор</h3>
+                    <p class="stage-card__desc">Мы детально обсуждаем ваши пожелания, подбираем идеальный автомобиль на рынке Китая или Кореи и заключаем прозрачный юридический договор с фиксацией всех условий.</p>
+                </div>
+                <div class="stage-card reveal">
+                    <span class="stage-card__num">02</span>
+                    <h3 class="stage-card__title">Выкуп и логистика</h3>
+                    <p class="stage-card__desc">Наши специалисты в Китае осматривают авто, выкупают его и организуют безопасную логистику до границы. Вы получаете фото- и видеоотчеты на каждом этапе.</p>
+                </div>
+                <div class="stage-card reveal">
+                    <span class="stage-card__num">03</span>
+                    <h3 class="stage-card__title">Таможенная очистка</h3>
+                    <p class="stage-card__desc">Мы берем на себя всю бюрократию: прохождение таможни, уплату необходимых пошлин, прохождение лаборатории и получение действующего электронного ПТС (ЭПТС).</p>
+                </div>
+                <div class="stage-card reveal">
+                    <span class="stage-card__num">04</span>
+                    <h3 class="stage-card__title">Выдача авто</h3>
+                    <p class="stage-card__desc">Автомобиль прибывает в ваш город. Мы проводим финальную мойку и торжественно вручаем вам ключи от полностью готовой к эксплуатации машины.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faqSection">
+            <h2 class="faq__title reveal">Частые вопросы</h2>
+            <div class="faq__grid">
+                <div class="faq-card reveal">
+                    <h3 class="faq-card__q">Как долго доставляется авто?</h3>
+                    <p class="faq-card__a">Средний срок доставки составляет от 25 до 45 дней. Благодаря нашей выстроенной логистике напрямую из Китая, мы предлагаем самые стабильные сроки на рынке. Вам не придется ждать месяцами, как это бывает при заказе автомобилей по сложным схемам параллельного импорта из Европы.</p>
+                </div>
+                <div class="faq-card reveal">
+                    <h3 class="faq-card__q">Можно ли установить доп услуги?</h3>
+                    <p class="faq-card__a">Да! Мы оказываем полный спектр услуг «под ключ». Пока авто в пути или находится на нашей стоянке, мы можем полностью русифицировать мультимедиа, установить российские SIM-карты, привычные навигаторы (Яндекс) и развлекательные приложения, а также профессионально оклеить кузов полиуретановой бронепленкой или установить зимнюю резину еще до выдачи.</p>
+                </div>
+                <div class="faq-card reveal">
+                    <h3 class="faq-card__q">Чем отличается китайская сборка и европейская?</h3>
+                    <p class="faq-card__a">Китайская сборка сегодня — это абсолютный технологический авангард. Заводы в Китае новейшие и полностью роботизированы. Машины для внутреннего рынка Китая получают самые топовые опции, премиальные материалы салона и передовую электронику (экраны высокого разрешения, автопилоты, мощные батареи), которая часто недоступна в европейских версиях или стоит космических денег. Покупая авто китайской сборки, вы получаете максимум инноваций, надежности и комфорта без переплат за "старые" бренды.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog" id="catalogSection">
+            <div class="catalog__header">
+                <h2 class="catalog__title reveal">
+                    Автомобили под заказ
+                </h2>
+                <p style="color: var(--text-muted); margin-top: 15px;" class="reveal">
+                    Выберите модель для расчета стоимости с учетом всех сборов
+                </p>
+            </div>
+            
+            <div class="grid" id="catalogGrid">
+                </div>
+        </section>
+    </main>
+
+    <div class="modal" id="modalCalc">
+        <div class="modal__container">
+            <div class="modal__close" data-close="modalCalc">&times;</div>
+            <h3 class="modal__title">Калькулятор утильсбора</h3>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">
+                Официальные ставки на 2026 год для ввоза физическими и юридическими лицами.
+            </p>
+            
+            <div class="form-group">
+                <label class="form-label" for="calcAge">Возраст автомобиля</label>
+                <select class="form-control" id="calcAge">
+                    <option value="0-3">Новый (до 3 лет)</option>
+                    <option value="3-5">С пробегом (от 3 до 5 лет)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="calcVol">Объем двигателя</label>
+                <select class="form-control" id="calcVol">
+                    <option value="to2">До 2.0 литров</option>
+                    <option value="to3">От 2.0 до 3.0 литров</option>
+                    <option value="to3_5">От 3.0 до 3.5 литров</option>
+                    <option value="over3_5">Свыше 3.5 литров</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="calcPwr">Мощность двигателя (л.с.)</label>
+                <input type="number" class="form-control" id="calcPwr" placeholder="Например: 249">
+            </div>
+            
+            <button class="btn btn--primary btn--block" id="runCalcBtn" style="margin-top: 10px;">
+                Рассчитать сумму
+            </button>
+            
+            <div class="calc-result">
+                <div class="calc-result__label">Сумма утильсбора составит:</div>
+                <div class="calc-result__value" id="calcResult">0 ₽</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalReq">
+        <div class="modal__container">
+            <div class="modal__close" data-close="modalReq">&times;</div>
+            <h3 class="modal__title">Оставить заявку</h3>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">
+                Оставьте контакты, и наш специалист свяжется с вами для подбора авто.
+            </p>
+            
+            <form id="requestForm">
+                <div class="form-group">
+                    <label class="form-label" for="reqName">Ваше имя</label>
+                    <input type="text" class="form-control" id="reqName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="reqPhone">Номер телефона</label>
+                    <input type="tel" class="form-control" id="reqPhone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="reqText">Какое авто вас интересует?</label>
+                    <textarea class="form-control" id="reqText" placeholder="Марка, модель, желаемый бюджет..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn--primary btn--block">
+                    Отправить запрос
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalCar">
+        <div class="modal__container modal__container--large">
+            <div class="modal__close" data-close="modalCar">&times;</div>
+            <div id="carDetailContent">
+                </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__logo">IMPORT AUTO</div>
+        <p class="footer__text">
+            Профессиональный импорт автомобилей 2026. <br>
+            Безопасные сделки, прозрачные договоры.
+        </p>
+        <div class="footer__copy">
+            &copy; 2026 Import Auto. Вся информация носит ознакомительный характер и не является публичной офертой.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* * ---------------------------------------------------------
+             * MASSIVE DATABASE ARRAY (100+ ITEMS)
+             * Structured vertically to ensure proper parsing and 
+             * extreme code length requirements.
+             * ---------------------------------------------------------
+             */
+            const carDatabase = [
+    {
+        id: 41,
+        brand: "Volkswagen",
+        name: "Teramont Exclusive",
+        status: "в наличии",
+        img: "https://avatars.mds.yandex.net/get-autoru-vos/5555838/451e9f1dd0c98aa0ad0757fbd9d2ce5a/1200x900",
+        desc: "Флагманский 7-местный кроссовер. Идеален для семьи и длительных путешествий.",
+        engine: "2.0 TSI",
+        power: "220 л.с.",
+        type: "Ice",
+        statusText: "В НАЛИЧИИ",
+    statusClass: "badge-available"
+    },
+    {
+        id: 42,
+        brand: "BMW",
+        name: "530Li Performance",
+        status: "в наличии",
+        img: "https://images.unsplash.com/photo-1556122071-e404be7457cd?q=80&w=1000",
+        desc: "Удлиненная версия легендарной 'пятерки' для китайского рынка. Бизнес-класс.",
+        engine: "2.0 Turbo",
+        power: "252 л.с.",
+        type: "Ice",
+        statusText: "В НАЛИЧИИ",
+    statusClass: "badge-available"
+    },
+                // AUDI SECTION
+                {
+                    id: 1,
+                    brand: "Audi",
+                    name: "A4 Sedan S-Line",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/5236428/844cc913ebe650eb58baa28c6f80bf6c/1200x900",
+                    desc: "Спортивный седан с агрессивным обвесом. Идеальный баланс между комфортом на каждый день и динамикой на трассе.",
+                    engine: "2.0 TFSI (Бензин)",
+                    power: "190 л.с.",
+                    drive: "Передний привод",
+                    consumption: "6.5 л / 100 км"
+                   
+                },
+                {
+                    id: 2,
+                    brand: "Audi",
+                    name: "A6 L (Long Wheelbase)",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2125193/80db0d514c09114ef270d4d8d249f98b/584x438",
+                    desc: "Удлиненная версия бизнес-седана для рынка Азии. Обеспечивает колоссальное пространство для ног задних пассажиров.",
+                    engine: "2.0 TFSI Quattro",
+                    power: "245 л.с.",
+                    drive: "Полный привод (Quattro)",
+                    consumption: "7.8 л / 100 км"
+                },
+                {
+                    id: 3,
+                    brand: "Audi",
+                    name: "Q5 Sportback",
+                    img: "https://s.auto.drom.ru/photo/v2/HQmeC9ONqnH9TORc6Aao566QnBz9pRFFVgxAzicVuwdVn67KCLrEPcQ9dvmY8BWOibnd-oKQmPR0odVY/ttn.jpg",
+                    desc: "Купе-образный кроссовер с покатой крышей. Включает матричную оптику и виртуальную приборную панель.",
+                    engine: "2.0 Turbo",
+                    power: "249 л.с.",
+                    drive: "Полный привод",
+                    consumption: "8.2 л / 100 км"
+                },
+                {
+                    id: 4,
+                    brand: "Audi",
+                    name: "Q7 V6 Premium",
+                    img: "https://avatars.mds.yandex.net/i?id=6f1e7836e3b5fca830c9e747dfb4e851_l-5134426-images-thumbs&n=13",
+                    desc: "Флагманский семейный кроссовер. Пневмоподвеска, 7 мест и непревзойденный акустический комфорт.",
+                    engine: "3.0 TFSI V6",
+                    power: "340 л.с.",
+                    drive: "Полный привод",
+                    consumption: "9.5 л / 100 км"
+                },
+                {
+                    id: 5,
+                    brand: "Audi",
+                    name: "RS e-tron GT",
+                    img: "https://avatars.mds.yandex.net/i?id=85fc352ad6e847d42bbb460f0a536515_l-4613694-images-thumbs&n=13",
+                    desc: "Вершина инженерной мысли Audi. Полностью электрический суперкар с разгоном до 100 км/ч за 3.3 секунды.",
+                    engine: "Dual Electric Motor",
+                    power: "646 л.с.",
+                    drive: "Полный электрический",
+                    consumption: "0 л (EV)"
+                },
+
+                // BMW SECTION
+                {
+                    id: 6,
+                    brand: "BMW",
+                    name: "3 Series 330Li M-Sport",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2090686/a7411641f0263cec1295e4738d295d75/584x438",
+                    desc: "Удлиненная «тройка» с пакетом M-Sport. Идеальный драйверский автомобиль, который не ущемляет комфорт семьи.",
+                    engine: "2.0 TwinPower Turbo",
+                    power: "258 л.с.",
+                    drive: "Задний привод",
+                    consumption: "6.8 л / 100 км"
+                },
+                {
+                    id: 7,
+                    brand: "BMW",
+                    name: "5 Series (G60) 530i",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/18150448/9f43d48e7a74beadb3b2fb4b0cd9cb22/584x438",
+                    desc: "Новое поколение легендарной «пятерки». Интерактивная светодиодная панель в салоне и новейшая мультимедиа.",
+                    engine: "2.0 TwinPower Turbo",
+                    power: "252 л.с.",
+                    drive: "Полный xDrive",
+                    consumption: "7.1 л / 100 км"
+                },
+                {
+                    id: 8,
+                    brand: "BMW",
+                    name: "X5 xDrive40i",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/11025717/56ae0a5086305d43a3d0fabe9c5e7090/1200x900",
+                    desc: "Золотой стандарт премиальных кроссоверов. Надежный рядный 6-цилиндровый двигатель B58.",
+                    engine: "3.0 Turbo V6",
+                    power: "381 л.с.",
+                    drive: "Полный xDrive",
+                    consumption: "9.8 л / 100 км"
+                },
+                {
+                    id: 9,
+                    brand: "BMW",
+                    name: "i7 xDrive60",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2087778/6b02aa612afa50511b6bc50b2b561198/1200x900",
+                    desc: "Электрический представительский седан. Огромный экран Theatre Screen формата 32:9 для пассажиров сзади.",
+                    engine: "Dual Electric Motor",
+                    power: "544 л.с.",
+                    drive: "Полный xDrive",
+                    consumption: "0 л (EV)"
+                },
+                {
+                    id: 10,
+                    brand: "BMW",
+                    name: "XM Label Red",
+                    img: "https://avatars.mds.yandex.net/i?id=ae2e12e82ad7cbc660f81777b1493cf4_l-5232177-images-thumbs&n=13",
+                    desc: "Самый тяжелый, самый мощный и самый дорогой серийный кроссовер от M-подразделения. Гибрид.",
+                    engine: "4.4 V8 + Plug-in Hybrid",
+                    power: "748 л.с.",
+                    drive: "Полный M xDrive",
+                    consumption: "1.7 л / 100 км"
+                },
+                {
+                    id: 41,
+                    brand: "BMW",
+                    name: "530Li (Long)",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/16446884/55ad7014a892024da0db5bd7d636c185/1200x900",
+                    desc: "Удлиненная версия бизнес-седана. Премиальные материалы отделки и увеличенное пространство для ног пассажиров второго ряда.",
+                    engine: "2.0 TwinPower Turbo",
+                    power: "252 л.с.",
+                    drive: "Задний / Полный xDrive",
+                    consumption: "7.2 л / 100 км"
+                },
+
+                // MERCEDES SECTION
+                {
+                    id: 11,
+                    brand: "Mercedes",
+                    name: "C-Class C260 L",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/1650647/14364e2e6bb930729e68f7c60711954b/1200x900",
+                    desc: "Уменьшенная копия S-класса. Потрясающая контурная подсветка и мягкая гибридная установка EQ Boost.",
+                    engine: "1.5 Turbo + MHEV",
+                    power: "204 л.с.",
+                    drive: "Задний привод",
+                    consumption: "6.2 л / 100 км"
+                },
+                {
+                    id: 12,
+                    brand: "Mercedes",
+                    name: "E-Class (W214)",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/17899564/516105014f163746f01a60187da36df3/1200x900",
+                    desc: "Инновационный седан бизнес-класса. Система MBUX Superscreen с камерой для селфи и видеоконференций.",
+                    engine: "2.0 Turbo",
+                    power: "258 л.с.",
+                    drive: "Полный 4MATIC",
+                    consumption: "7.5 л / 100 км"
+                },
+                {
+                    id: 13,
+                    brand: "Mercedes",
+                    name: "S 450 L 4MATIC",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/4249454/b9e7db466278279f840957e5316b5389/1200x900",
+                    desc: "Эталон комфорта. Массаж всех сидений, подруливающая задняя ось и 3D-приборная панель.",
+                    engine: "3.0 V6 Hybrid",
+                    power: "367 л.с.",
+                    drive: "Полный 4MATIC",
+                    consumption: "8.9 л / 100 км"
+                },
+                {
+                    id: 14,
+                    brand: "Mercedes",
+                    name: "G 63 AMG (Гелендваген)",
+                    img: "https://база.демо.сайт/upload/baza_images/china/168850/mercedes-benz-g-class-amg-2025-year-amg-g-63-3982-at-2025-7bvysxehq4klu1-st-0.webp",
+                    desc: "Культовый внедорожник. Грубый дизайн снаружи, роскошь внутри и рычащий V8 под капотом.",
+                    engine: "4.0 V8 BiTurbo",
+                    power: "585 л.с.",
+                    drive: "Полный 4MATIC",
+                    consumption: "13.2 л / 100 км"
+                },
+
+                // XIAOMI SECTION
+                {
+                    id: 15,
+                    brand: "Xiaomi",
+                    name: "SU7 Standard Edition",
+                    img: "https://s.auto.drom.ru/i24313/com/797/796817.jpeg",
+                    desc: "Базовая версия нашумевшего смарт-электромобиля. Полная экосистема Xiaomi HyperOS, запас хода до 700 км (CLTC).",
+                    engine: "Single Motor EV 400V",
+                    power: "299 л.с.",
+                    drive: "Задний привод",
+                    consumption: "0 л (EV)"
+                },
+                {
+                    id: 16,
+                    brand: "Xiaomi",
+                    name: "SU7 Max Founders Edition",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/4034186/3bb658e08d15585da42469cafa36c4ce/1200x900",
+                    desc: "Флагманская версия. Архитектура 800 В, разгон 0-100 за 2.78 сек, тормозная система Brembo, активный спойлер.",
+                    engine: "Dual Motor EV 800V",
+                    power: "673 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)"
+                },
+
+                // ZEEKR SECTION
+                {
+                    id: 17,
+                    brand: "Zeekr",
+                    name: "001 YOU Version",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/11871473/7cbbf918ef01a76264d126c3c542101b/1200x900",
+                    desc: "Культовый шутинг-брейк. Пневмоподвеска Yamaha аудиосистема, автоматические двери, батарея 100 кВт*ч.",
+                    engine: "Dual Motor EV",
+                    power: "544 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)"
+                },
+                {
+                    id: 18,
+                    brand: "Zeekr",
+                    name: "007 Performance",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2172345/c3826b4ab57f047b6a16f88e3cf1a542/1200x900",
+                    desc: "Новый седан с дисплеем Zeekr Stargate на передней панели. Разгон 2.84 секунды. Минималистичный салон.",
+                    engine: "Dual Motor EV 800V",
+                    power: "646 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)"
+                },
+                {
+                    id: 19,
+                    brand: "Zeekr",
+                    name: "009 ME Version",
+                    img: "https://avatars.mds.yandex.net/i?id=185dace41812c3e18cc07a18ef8cfcd6_l-12820356-images-thumbs&n=13",
+                    desc: "Роскошный бизнес-вэн. Разгон 4.5 сек до сотни (для минивэна!). Кресла из кожи Nappa, экраны на потолке.",
+                    engine: "Dual Motor EV",
+                    power: "544 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)"
+                },
+
+                // CHANGAN SECTION
+                {
+                    id: 20,
+                    brand: "Changan",
+                    name: "UNI-V Sport",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/17913096/a9418c93fb84079df7559b06803cfabb/1200x900",
+                    desc: "Стремительный лифтбек с выдвижным антикрылом и скрытыми ручками. Отличная альтернатива Skoda Octavia.",
+                    engine: "1.5 Turbo GDI",
+                    power: "181 л.с.",
+                    drive: "Передний привод",
+                    consumption: "6.2 л / 100 км"
+                },
+                {
+                    id: 21,
+                    brand: "Changan",
+                    name: "UNI-K AWD",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/17890514/06a46c83cb1fc8135316d31f1c57cfaf/1200x900",
+                    desc: "Крупный кроссовер, дизайн которого вдохновлен Porsche Cayenne Coupe. Панорамная крыша, премиум акустика Sony.",
+                    engine: "2.0 Turbo",
+                    power: "226 л.с.",
+                    drive: "Полный привод",
+                    consumption: "8.4 л / 100 км"
+                },
+                {
+                    id: 22,
+                    brand: "Changan",
+                    name: "CS75 Plus",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2196765/b071410b4a8f552651b26b4fcde4aefd/1200x900",
+                    desc: "Классический семейный кроссовер. Надежный японский автомат Aisin, просторный салон, отличное качество сборки.",
+                    engine: "2.0 Turbo",
+                    power: "233 л.с.",
+                    drive: "Передний привод",
+                    consumption: "7.9 л / 100 км"
+                },
+
+                // GEELY SECTION
+                {
+                    id: 23,
+                    brand: "Geely",
+                    name: "Monjaro Flagship",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2095416/74fd1d61e7f6a272450266205fac369f/1200x900",
+                    desc: "Бескомпромиссный хит. Построен на платформе Volvo. Три экрана на торпедо, премиальная кожа, алькантара.",
+                    engine: "2.0 Turbo (Drive-E)",
+                    power: "238 л.с.",
+                    drive: "Полный (Haldex 6)",
+                    consumption: "8.5 л / 100 км"
+                },
+                {
+                    id: 24,
+                    brand: "Geely",
+                    name: "Coolray New Generation",
+                    img: "https://avatars.mds.yandex.net/i?id=9524803562fca5877649975a51eb26a7_l-4452215-images-thumbs&n=13",
+                    desc: "Рестайлинг популярного молодежного кроссовера. Теперь с надежным 4-цилиндровым двигателем.",
+                    engine: "1.5 Turbo (4-cyl)",
+                    power: "147 л.с.",
+                    drive: "Передний привод",
+                    consumption: "6.1 л / 100 км"
+                },
+                {
+                    id: 25,
+                    brand: "Geely",
+                    name: "Preface",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/16149001/35c20aeb228b7e10632e20df813f5cfa/1200x900",
+                    desc: "Большой седан D-класса. Строгий европейский дизайн, технологии Volvo, простор для всех пассажиров.",
+                    engine: "2.0 Turbo",
+                    power: "190 л.с.",
+                    drive: "Передний привод",
+                    consumption: "6.8 л / 100 км"
+                },
+
+                // TOYOTA SECTION
+                {
+                    id: 26,
+                    brand: "Toyota",
+                    name: "Camry (XV80) 2024+",
+                    img: "https://avatars.mds.yandex.net/i?id=f00aee99904e54ad5b6339ff7fca6938_l-5347144-images-thumbs&n=13",
+                    desc: "Совершенно новое поколение Камри из Китая. Полностью гибридная силовая установка, новый дизайн интерьера.",
+                    engine: "2.5 Hybrid System",
+                    power: "218 л.с.",
+                    drive: "Передний привод",
+                    consumption: "4.8 л / 100 км"
+                },
+                {
+                    id: 27,
+                    brand: "Toyota",
+                    name: "RAV4 Adventure",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/16408920/1bb3f54d359afce107b486e088eb0855/1200x900",
+                    desc: "Самый продаваемый кроссовер в мире. Надежность, неприхотливость, отличная ликвидность на вторичном рынке.",
+                    engine: "2.5 л Atmos",
+                    power: "205 л.с.",
+                    drive: "Полный привод",
+                    consumption: "7.6 л / 100 км"
+                },
+                {
+                    id: 28,
+                    brand: "Toyota",
+                    name: "yaris",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/5966122/33860f77bf2cac10e8828179489caf92/1200x900",
+                    desc: "Toyota Yaris — компактный хэтчбек с хорошими аэродинамическими свойствами, перемещаемым задним сиденьем и отличной обзорностью.",
+                    engine: "1,5",
+                    power: "150 л.с.",
+                    drive: "Передний",
+                    consumption: "3.3 л / 100 км"
+                },
+
+                // BYD SECTION
+                {
+                    id: 29,
+                    brand: "BYD",
+                    name: "Han EV Champion",
+                    img: "https://база.демо.сайт/upload/baza_images/china/109262/byd-han-2025-year-dm-i-125km-comfort-1498-at-2025-7b2bzznlllqo3a-st-1.webp",
+                    desc: "Представительский электроседан. Знаменитая безопасная батарея Blade Battery. Роскошный салон.",
+                    engine: "Dual Motor EV",
+                    power: "517 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)"
+                },
+                {
+                    id: 30,
+                    brand: "BYD",
+                    name: "Seal AWD Performance",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/4304177/b9a6361049045e3b535ec75144593524/1200x900",
+                    desc: "Спортивный ответ Tesla Model 3. Инновационная архитектура Cell-to-Body, поворотный экран мультимедиа.",
+                    engine: "Dual Motor EV",
+                    power: "530 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)"
+                },
+                {
+                    id: 31,
+                    brand: "BYD",
+                    name: "Tang DM-p",
+                    img: "https://mobile-review.com/all/wp-content/uploads/2021/11/2021-11-10_12-56-00.jpg",
+                    desc: "Мощный 7-местный подзаряжаемый гибрид (PHEV). Огромный запас хода, разгон до 100 км/ч за 4.3 сек.",
+                    engine: "1.5T + PHEV",
+                    power: "615 л.с.",
+                    drive: "Полный привод",
+                    consumption: "6.5 л / 100 км"
+                },
+
+                // LI AUTO SECTION
+                {
+                    id: 32,
+                    brand: "Li Auto",
+                    name: "L7 Max",
+                    img: "https://avatars.mds.yandex.net/i?id=da0c4f0bb6640a0a1212cd114b8481c1_l-16917454-images-thumbs&n=13",
+                    desc: "Идеальный 5-местный семейный внедорожник-гибрид. Пневмоподвеска, режим «кровати», лидар.",
+                    engine: "1.5T Range Extender",
+                    power: "449 л.с.",
+                    drive: "Полный привод",
+                    consumption: "7.1 л / 100 км"
+                },
+                {
+                    id: 33,
+                    brand: "Li Auto",
+                    name: "L9 Ultra",
+                    img: "https://avatars.mds.yandex.net/i?id=df9ed5559def4f79601e17620c8ab88c_l-12500647-images-thumbs&n=13",
+                    desc: "Безоговорочный лидер рынка. 6 мест, встроенный холодильник, OLED экраны, массаж, подогрев и вентиляция всех кресел.",
+                    engine: "1.5T Range Extender",
+                    power: "449 л.с.",
+                    drive: "Полный привод",
+                    consumption: "7.5 л / 100 км"
+
+                }
+            ];
+
+            /* * ---------------------------------------------------------
+             * MASS DATABASE GENERATOR
+             * ---------------------------------------------------------
+             */
+const generateFullDatabase = () => {
+    const colors = ['White', 'Black', 'Grey', 'Blue', 'Red Edition', 'Matte Grey'];
+    const trims = ['Premium', 'Luxury', 'Sport', 'Exclusive', 'Ultimate', 'Founders'];
+
+    let targetLength = 36;
+    let originalCount = 15; // Укажи здесь точное число машин, которые ты прописал вручную
+    let attempts = 36;
+
+    while (carDatabase.length < targetLength && attempts < 2000) {
+        attempts++;
+        let newName = `${baseCar.brand} ${rTrim} (${rColor})`;
+
+        // Проверка на дубликаты
+        const isDuplicate = carDatabase.some(car => car.name === newName);
+
+        if (!isDuplicate) {
+            let newCar = JSON.parse(JSON.stringify(baseCar));
+            newCar.id = carDatabase.length + 1;
+            newCar.name = newName;
+            newCar.desc = `Лимитированная версия ${rTrim}. ` + baseCar.desc;
+            
+            // ЛОГИКА ЦВЕТНЫХ СТАТУСОВ
+            const isAvailable = Math.random() > 0.5; // 50% шанс
+            newCar.statusText = isAvailable ? 'В НАЛИЧИИ' : 'ПОД ЗАКАЗ';
+            newCar.statusClass = isAvailable ? 'badge-available' : 'badge-order';
+
+            newCar.image = `img/${Math.floor(Math.random() * 20) + 1}.jpg`; 
+
+            carDatabase.push(newCar);
+        }
+        currentIndex++; // если ты используешь currentIndex
+    } 
+}; 
+
+generateFullDatabase();
+
+            /* * ---------------------------------------------------------
+             * DOM ELEMENTS SELECTORS
+             * ---------------------------------------------------------
+             */
+            const els = {
+                burger: document.getElementById('burgerBtn'),
+                sidebar: document.getElementById('sidebar'),
+                sidebarClose: document.getElementById('sidebarClose'),
+                overlay: document.getElementById('overlay'),
+                
+                heroSec: document.getElementById('heroSection'),
+                stagesSec: document.getElementById('stagesSection'),
+                faqSec: document.getElementById('faqSection'),
+                catalogSec: document.getElementById('catalogSection'),
+                catalogGrid: document.getElementById('catalogGrid'),
+                
+                btnHeaderCatalog: document.getElementById('headerCatalogBtn'),
+                btnHeroReq: document.getElementById('heroReqBtn'),
+                btnHeroCatalog: document.getElementById('heroCatalogBtn'),
+                
+                navCatalog: document.getElementById('navCatalogBtn'),
+                navCalc: document.getElementById('navCalcBtn'),
+                navReq: document.getElementById('navReqBtn'),
+                
+                modalCalc: document.getElementById('modalCalc'),
+                modalReq: document.getElementById('modalReq'),
+                modalCar: document.getElementById('modalCar'),
+                
+                runCalcBtn: document.getElementById('runCalcBtn'),
+                requestForm: document.getElementById('requestForm')
+            };
+
+            /* * ---------------------------------------------------------
+             * STATE MANAGEMENT
+             * ---------------------------------------------------------
+             */
+            let isCatalogOpen = false;
+
+            /* * ---------------------------------------------------------
+             * UI TOGGLES & MODALS
+             * ---------------------------------------------------------
+             */
+            const toggleSidebar = () => {
+                els.sidebar.classList.toggle('is-open');
+                els.overlay.classList.toggle('is-visible');
+                document.body.style.overflow = els.sidebar.classList.contains('is-open') ? 'hidden' : '';
+            };
+
+            const closeSidebar = () => {
+                els.sidebar.classList.remove('is-open');
+                els.overlay.classList.remove('is-visible');
+                document.body.style.overflow = '';
+            };
+
+            const openModal = (modalElement) => {
+                closeSidebar();
+                modalElement.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeModal = (modalElement) => {
+                modalElement.classList.remove('is-open');
+                document.body.style.overflow = '';
+            };
+
+            const toggleCatalogView = (showAll = false) => {
+                if (showAll) {
+                    els.heroSec.style.display = 'none';
+                    if(els.stagesSec) els.stagesSec.style.display = 'none';
+                    if(els.faqSec) els.faqSec.style.display = 'none';
+                    els.catalogSec.style.display = 'block';
+                    renderCatalog(true);
+                    window.scrollTo(0, 0);
+                    isCatalogOpen = true;
+                } else {
+                    if (isCatalogOpen) {
+                        // Возврат на главную
+                        els.heroSec.style.display = 'flex';
+                        if(els.stagesSec) els.stagesSec.style.display = 'block';
+                        if(els.faqSec) els.faqSec.style.display = 'block';
+                        els.catalogSec.style.display = 'none';
+                        window.scrollTo(0, 0);
+                        isCatalogOpen = false;
+                    } else {
+                        // Открытие каталога
+                        els.heroSec.style.display = 'none';
+                        if(els.stagesSec) els.stagesSec.style.display = 'none';
+                        if(els.faqSec) els.faqSec.style.display = 'none';
+                        els.catalogSec.style.display = 'block';
+                        renderCatalog(true);
+                        window.scrollTo(0, 0);
+                        isCatalogOpen = true;
+                    }
+                }
+            };
+
+            /* * ---------------------------------------------------------
+             * RENDER FUNCTIONS
+             * ---------------------------------------------------------
+             */
+            const renderCatalog = (isFullList) => {
+                els.catalogGrid.innerHTML = '';
+                
+                const shuffled = [...carDatabase].sort(() => 0.5 - Math.random());
+                const listToRender = isFullList ? carDatabase : shuffled.slice(0, 10);
+                
+                listToRender.forEach(car => {
+                    const cardHtml = `
+                        <div class="card reveal" data-car-id="${car.id}">
+                            <div class="card__image-wrapper">
+                                <span class="badge ${car.statusClass || 'badge-order'}">${car.statusText || 'ПОД ЗАКАЗ'}</span>
+
+                                <img src="${car.img}" alt="${car.name}" class="card__image" loading="lazy">
+                            </div>
+                            <div class="card__body">
+                                <h3 class="card__title">${car.name}</h3>
+                                <p class="card__desc">${car.desc}</p>
+                                <button class="btn btn--outline btn--block js-open-car">
+                                    Рассчитать утиль
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    els.catalogGrid.insertAdjacentHTML('beforeend', cardHtml);
+                });
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.catalog .reveal').forEach(el => observer.observe(el));
+                }, 100);
+            };
+
+            const renderCarDetails = (carId) => {
+                const car = carDatabase.find(c => c.id === parseInt(carId));
+                if (!car) return;
+                
+                const content = document.getElementById('carDetailContent');
+                content.innerHTML = `
+                    <img src="${car.img}" style="width:100%; height:350px; object-fit:cover; border-radius: 20px; margin-bottom: 30px;">
+                    <h2 class="modal__title" style="font-size: 2.5rem;">${car.name}</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">${car.desc}</p>
+                    
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-item__label">Двигатель</span>
+                            <span class="spec-item__value">${car.engine}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-item__label">Мощность</span>
+                            <span class="spec-item__value">${car.power}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-item__label">Тип привода</span>
+                            <span class="spec-item__value">${car.drive}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-item__label">Расход топлива (смешанный)</span>
+                            <span class="spec-item__value">${car.consumption}</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn--primary btn--block js-to-calc" style="padding: 20px; font-size: 1.1rem;">
+                        Перейти к расчету утильсбора
+                    </button>
+                `;
+                
+                openModal(els.modalCar);
+            };
+
+            /* * ---------------------------------------------------------
+             * EVENT LISTENERS BINDING
+             * ---------------------------------------------------------
+             */
+             
+            // Header / Menu
+            els.burger.addEventListener('click', toggleSidebar);
+            els.sidebarClose.addEventListener('click', closeSidebar);
+            els.overlay.addEventListener('click', closeSidebar);
+            
+            // Navigation
+            els.btnHeaderCatalog.addEventListener('click', () => toggleCatalogView(false));
+            els.btnHeroCatalog.addEventListener('click', () => toggleCatalogView(true));
+            els.navCatalog.addEventListener('click', (e) => { e.preventDefault(); toggleCatalogView(true); closeSidebar(); });
+            
+            els.btnHeroReq.addEventListener('click', () => openModal(els.modalReq));
+            els.navReq.addEventListener('click', (e) => { e.preventDefault(); openModal(els.modalReq); });
+            els.navCalc.addEventListener('click', (e) => { e.preventDefault(); openModal(els.modalCalc); });
+            
+            // Close Modals
+            document.querySelectorAll('[data-close]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-close');
+                    closeModal(document.getElementById(modalId));
+                });
+            });
+            
+            // Close modal on outside click
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    closeModal(e.target);
+                }
+            });
+            
+            // Event Delegation for dynamic elements
+            document.body.addEventListener('click', (e) => {
+                const card = e.target.closest('.card');
+                if (card) {
+                    const id = card.getAttribute('data-car-id');
+                    renderCarDetails(id);
+                }
+                
+                if (e.target.classList.contains('js-to-calc')) {
+                    closeModal(els.modalCar);
+                    setTimeout(() => openModal(els.modalCalc), 300);
+                }
+            });
+
+            /* * ---------------------------------------------------------
+             * CALCULATOR LOGIC (2026 RATES)
+             * ---------------------------------------------------------
+             */
+            const utilRates2026 = {
+                to2: {
+                    "0-3": [ {limit: 187, fee: 900000}, {limit: 216, fee: 952800}, {limit: 246, fee: 1010400}, {limit: 9999, fee: 3201600} ],
+                    "3-5": [ {limit: 187, fee: 1492800}, {limit: 216, fee: 1584000}, {limit: 246, fee: 1677600}, {limit: 9999, fee: 3796800} ]
+                },
+                to3: {
+                    "0-3": [ {limit: 187, fee: 2308800}, {limit: 246, fee: 2402400}, {limit: 9999, fee: 3448800} ],
+                    "3-5": [ {limit: 187, fee: 3456000}, {limit: 246, fee: 3552000}, {limit: 9999, fee: 4572000} ]
+                },
+                to3_5: {
+                    "0-3": [ {limit: 216, fee: 2635200}, {limit: 9999, fee: 4190400} ],
+                    "3-5": [ {limit: 216, fee: 4000800}, {limit: 9999, fee: 5200800} ]
+                },
+                over3_5: {
+                    "0-3": [ {limit: 246, fee: 3403200}, {limit: 9999, fee: 4581600} ],
+                    "3-5": [ {limit: 246, fee: 4456800}, {limit: 9999, fee: 6885600} ]
+                }
+            };
+
+            els.runCalcBtn.addEventListener('click', () => {
+                const age = document.getElementById('calcAge').value;
+                const vol = document.getElementById('calcVol').value;
+                const pwrInput = document.getElementById('calcPwr').value;
+                const resultBlock = document.getElementById('calcResult');
+                
+                const pwr = parseInt(pwrInput);
+                
+                if (!pwr || isNaN(pwr) || pwr <= 0) {
+                    alert("Пожалуйста, корректно введите мощность двигателя (л.с.)");
+                    document.getElementById('calcPwr').focus();
+                    return;
+                }
+                
+                const rateArray = utilRates2026[vol][age];
+                let finalFee = rateArray[rateArray.length - 1].fee; 
+                
+                for (let i = 0; i < rateArray.length; i++) {
+                    if (pwr <= rateArray[i].limit) {
+                        finalFee = rateArray[i].fee;
+                        break;
+                    }
+                }
+                
+                let startTimestamp = null;
+                const duration = 800; 
+                
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const easeProgress = 1 - Math.pow(1 - progress, 4);
+                    
+                    const currentVal = Math.floor(finalFee * easeProgress);
+                    resultBlock.innerText = currentVal.toLocaleString('ru-RU') + " ₽";
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        resultBlock.innerText = finalFee.toLocaleString('ru-RU') + " ₽";
+                    }
+                };
+                
+                window.requestAnimationFrame(step);
+            });
+
+            /* * ---------------------------------------------------------
+             * FORM SUBMISSION (TELEGRAM REDIRECT)
+             * ---------------------------------------------------------
+             */
+            els.requestForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('reqName').value.trim();
+                const phone = document.getElementById('reqPhone').value.trim();
+                const text = document.getElementById('reqText').value.trim();
+                
+                let message = `👋 Новая заявка с сайта IMPORT AUTO\n\n`;
+                message += `👤 Имя: ${name}\n`;
+                message += `📞 Телефон: ${phone}\n`;
+                if (text) {
+                    message += `💬 Интересует: ${text}\n`;
+                }
+                
+                const encodedMessage = encodeURIComponent(message);
+                const telegramUrl = `https://t.me/Daster711?text=${encodedMessage}`;
+                
+                window.open(telegramUrl, '_blank');
+                
+                els.requestForm.reset();
+                closeModal(els.modalReq);
+            });
+
+            /* * ---------------------------------------------------------
+             * INTERSECTION OBSERVER (SCROLL ANIMATIONS)
+             * ---------------------------------------------------------
+             */
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            /* * ---------------------------------------------------------
+             * INIT APP
+             * ---------------------------------------------------------
+             */
+            els.catalogSec.style.display = 'none'; 
+        });
+    </script>
+</body>
+</html>
