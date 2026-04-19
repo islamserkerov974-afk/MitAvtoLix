@@ -902,9 +902,6 @@
             }
         }
     </style>
-    <!-- Yandex Autoplacement 19134119 -->
-<script src="https://yandex.ru/ads/system/context.js" async></script>
-<script data-page-id="19134119" src="https://yandex.ru/ads/system/ap-loader.js" async></script>
 </head>
 <body>
 
@@ -1028,6 +1025,57 @@
                     <h3 class="faq-card__q">Чем отличается китайская сборка и европейская?</h3>
                     <p class="faq-card__a">Китайская сборка сегодня — это абсолютный технологический авангард. Заводы в Китае новейшие и полностью роботизированы. Машины для внутреннего рынка Китая получают самые топовые опции, премиальные материалы салона и передовую электронику (экраны высокого разрешения, автопилоты, мощные батареи), которая часто недоступна в европейских версиях или стоит космических денег. Покупая авто китайской сборки, вы получаете максимум инноваций, надежности и комфорта без переплат за "старые" бренды.</p>
                 </div>
+                <div class="global-car-stats" style="padding: 30px 0; background: #fdfdfd; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; margin: 40px 0; font-family: 'Segoe UI', Roboto, sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <p style="margin: 0; font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+            Мировая статистика продаж за сегодня
+        </p>
+        
+        <div style="font-size: 42px; font-weight: 800; color: #1a1a1a; display: flex; justify-content: center; align-items: center; gap: 5px;">
+            <span id="car-counter" style="transition: all 0.5s ease-out;">0</span>
+            <span style="color: #d32f2f; font-size: 24px; margin-bottom: 10px;">↑</span>
+        </div>
+
+        <p style="margin-top: 10px; font-size: 14px; color: #666;">
+            *каждый третий автомобиль в мире, продаётсяв Китае 🇨🇳
+        </p>
+    </div>
+</div>
+
+<script>
+function updateCarCounter() {
+    const counterElement = document.getElementById('car-counter');
+    const startOfDay = new Date();
+    startOfDay.setHours(0,0,0,0);
+    
+    const carsPerSecond = 2.92;
+    let lastValue = 0;
+
+    function tick() {
+        const now = new Date();
+        const secondsElapsed = (now - startOfDay) / 1000;
+        const currentValue = Math.floor(secondsElapsed * carsPerSecond);
+        
+        if (currentValue !== lastValue) {
+            // Небольшой эффект «подмигивания» при изменении числа
+            counterElement.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                counterElement.innerText = currentValue.toLocaleString('ru-RU');
+                counterElement.style.opacity = '1';
+            }, 50);
+            
+            lastValue = currentValue;
+        }
+    }
+    
+    // Обновляем часто, чтобы поймать момент появления новой машины (раз в 300мс)
+    setInterval(tick, 300);
+    tick();
+}
+
+document.addEventListener('DOMContentLoaded', updateCarCounter);
+</script>
             </div>
         </section>
 
