@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head><!-- Yandex.Metrika counter -->
+<head>head><!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -11,8 +11,6 @@
 
     ym(108606556, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/108606556" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMPORT AUTO - Авто из Китая и Кореи</title>
@@ -488,7 +486,7 @@
             color: var(--text-muted);
             font-size: 1.05rem;
             line-height: 1.7;
-            padding-left: 47px; /* Align with text, avoiding the question mark */
+            padding-left: 47px;
         }
 
         /* * ==========================================
@@ -504,13 +502,54 @@
 
         .catalog__header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .catalog__title {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
             letter-spacing: -1px;
+        }
+
+        /* NEW: Styles for Brand Filters */
+        .filter-panel {
+            display: none;
+            max-width: 1400px;
+            margin: 20px auto 40px;
+            padding: 20px;
+            background: var(--primary-bg);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .filter-panel.is-active {
+            display: flex;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 30px;
+            border: 1px solid var(--border-light);
+            background: var(--secondary-bg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
         }
 
         .grid {
@@ -541,33 +580,33 @@
             transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
         }
-/* Общий стиль для всех ярлыков */
-.badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    padding: 4px 12px;
-    border-radius: 20px; /* Скругляем края */
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    z-index: 10;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
 
-/* В НАЛИЧИИ — мягкий зеленый */
-.badge-available {
-    background-color: #2ecc71 !important;
-    color: white !important;
-}
+        /* Общий стиль для всех ярлыков */
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
 
-/* ПОД ЗАКАЗ — сдержанный красный или серый */
-.badge-order {
-    background-color: #e74c3c !important;
-    color: white !important;
-}
-}
+        /* В НАЛИЧИИ */
+        .badge-available {
+            background-color: #2ecc71 !important;
+            color: white !important;
+        }
+
+        /* ПОД ЗАКАЗ */
+        .badge-order {
+            background-color: #e74c3c !important;
+            color: white !important;
+        }
 
         .card__image-wrapper {
             position: relative;
@@ -587,21 +626,6 @@
             transform: scale(1.05);
         }
 
-        .card__badge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 2;
-        }
-
         .card__body {
             padding: 30px;
             display: flex;
@@ -612,7 +636,14 @@
         .card__title {
             font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .card__price {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 15px;
         }
 
         .card__desc {
@@ -687,7 +718,14 @@
         .modal__title {
             font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
+        }
+
+        .modal__price {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 20px;
         }
 
         /* * ==========================================
@@ -995,10 +1033,15 @@
                 <h2 class="catalog__title reveal">
                     Автомобили под заказ
                 </h2>
-                <p style="color: var(--text-muted); margin-top: 15px;" class="reveal">
-                    Выберите модель для расчета стоимости с учетом всех сборов
-                </p>
+                <div style="margin-top: 20px;" class="reveal">
+                    <button class="btn btn--outline" id="toggleFiltersBtn" style="padding: 10px 25px; border-radius: 30px; font-size: 0.9rem;">
+                        Скрыть / Показать марки
+                    </button>
+                </div>
             </div>
+
+            <div class="filter-panel reveal" id="brandFilters">
+                </div>
             
             <div class="grid" id="catalogGrid">
                 </div>
@@ -1099,42 +1142,171 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+          const utylData = {
+    // Категория: До 2 литров
+    to2: {
+        "0-3": [
+            { limit: 157.7, fee: 900000 },
+            { limit: 187.26, fee: 952800 },
+            { limit: 216.8, fee: 1010400 },
+            { limit: 246.36, fee: 1142400 },
+            { limit: 279, fee: 1291200 },
+            { limit: 305.53, fee: 1459200 },
+            { limit: 335.1, fee: 1663200 },
+            { limit: 364.66, fee: 1896000 },
+            { limit: 394.23, fee: 2160000 },
+            { limit: 423.79, fee: 2464800 },
+            { limit: 453.37, fee: 2808000 },
+            { limit: 492.7, fee: 3201600 },
+            { limit: 9999, fee: 3201600 }
+        ],
+        "3-5": [
+            { limit: 157.7, fee: 1492800 },
+            { limit: 187.26, fee: 1584000 },
+            { limit: 216.8, fee: 1677600 },
+            { limit: 246.36, fee: 1838400 },
+            { limit: 279, fee: 2011200 },
+            { limit: 305.53, fee: 2203200 },
+            { limit: 335.1, fee: 2412000 },
+            { limit: 364.66, fee: 2640000 },
+            { limit: 394.23, fee: 2892000 },
+            { limit: 423.79, fee: 3168000 },
+            { limit: 453.37, fee: 3468000 },
+            { limit: 492.7, fee: 3796800 },
+            { limit: 9999, fee: 3796800 }
+        ]
+    },
+
+    // Категория: До 3 литров
+    to3: {
+        "0-3": [
+            { limit: 187.26, fee: 2308800 },
+            { limit: 216.8, fee: 2364000 },
+            { limit: 246.36, fee: 2402400 },
+            { limit: 279, fee: 2520000 },
+            { limit: 305.53, fee: 2620800 },
+            { limit: 335.1, fee: 2726400 },
+            { limit: 364.66, fee: 2834400 },
+            { limit: 394.23, fee: 2949600 },
+            { limit: 423.79, fee: 3067200 },
+            { limit: 453.37, fee: 3189600 },
+            { limit: 492.7, fee: 3316800 },
+            { limit: 9999, fee: 3448800 }
+        ],
+        "3-5": [
+            { limit: 187.26, fee: 3456000 },
+            { limit: 216.8, fee: 3501600 },
+            { limit: 246.36, fee: 3552000 },
+            { limit: 279, fee: 3660000 },
+            { limit: 305.53, fee: 3770400 },
+            { limit: 335.1, fee: 3883200 },
+            { limit: 364.66, fee: 3991200 },
+            { limit: 394.23, fee: 4094400 },
+            { limit: 423.79, fee: 4209600 },
+            { limit: 453.37, fee: 4327200 },
+            { limit: 492.7, fee: 4447200 },
+            { limit: 9999, fee: 4572000 }
+        ]
+    },
+
+    // Категория: До 3.5 литров
+    to3_5: {
+        "0-3": [
+            { limit: 187.26, fee: 2635200 },
+            { limit: 216.8, fee: 2688000 },
+            { limit: 246.36, fee: 2743200 },
+            { limit: 279, fee: 2810400 },
+            { limit: 305.53, fee: 2880000 },
+            { limit: 335.1, fee: 3038400 },
+            { limit: 364.66, fee: 3206400 },
+            { limit: 394.23, fee: 3384000 },
+            { limit: 423.79, fee: 3568800 },
+            { limit: 453.37, fee: 3765600 },
+            { limit: 492.7, fee: 3972000 },
+            { limit: 9999, fee: 4190400 }
+        ],
+        "3-5": [
+            { limit: 187.26, fee: 4000800 },
+            { limit: 216.8, fee: 4044000 },
+            { limit: 246.36, fee: 4087200 },
+            { limit: 279, fee: 4144800 },
+            { limit: 305.53, fee: 4248000 },
+            { limit: 335.1, fee: 4356000 },
+            { limit: 364.66, fee: 4485600 },
+            { limit: 394.23, fee: 4620000 },
+            { limit: 423.79, fee: 4759200 },
+            { limit: 453.37, fee: 4908000 },
+            { limit: 492.7, fee: 5049600 },
+            { limit: 9999, fee: 5230800 }
+        ]
+    },
+
+    // Категория: Свыше 3.5 литров
+    over3_5: {
+        "0-3": [
+            { limit: 187.26, fee: 3345600 },
+            { limit: 216.8, fee: 3403200 },
+            { limit: 246.36, fee: 3460800 },
+            { limit: 279, fee: 3530400 },
+            { limit: 305.53, fee: 3600000 },
+            { limit: 335.1, fee: 3727200 },
+            { limit: 364.66, fee: 3856800 },
+            { limit: 394.23, fee: 3993600 },
+            { limit: 423.79, fee: 4132800 },
+            { limit: 453.37, fee: 4276800 },
+            { limit: 492.7, fee: 4425600 },
+            { limit: 9999, fee: 4581600 }
+        ],
+        "3-5": [
+            { limit: 187.26, fee: 4389600 },
+            { limit: 216.8, fee: 4456800 },
+            { limit: 246.36, fee: 4524000 },
+            { limit: 279, fee: 4627200 },
+            { limit: 305.53, fee: 4732800 },
+            { limit: 335.1, fee: 4992000 },
+            { limit: 364.66, fee: 5268000 },
+            { limit: 394.23, fee: 5558400 },
+            { limit: 364.66, fee: 5863200 },
+            { limit: 453.37, fee: 6187200 },
+            { limit: 492.7, fee: 6520800 },
+            { limit: 9999, fee: 6885600 }
+        ]
+    }
+};
 
             /* * ---------------------------------------------------------
-             * MASSIVE DATABASE ARRAY (100+ ITEMS)
-             * Structured vertically to ensure proper parsing and 
-             * extreme code length requirements.
+             * MASSIVE DATABASE ARRAY (36 ITEMS EXACTLY)
              * ---------------------------------------------------------
              */
             const carDatabase = [
-    {
-        id: 41,
-        brand: "Volkswagen",
-        name: "Teramont Exclusive",
-        status: "в наличии",
-        img: "https://avatars.mds.yandex.net/get-autoru-vos/5555838/451e9f1dd0c98aa0ad0757fbd9d2ce5a/1200x900",
-        desc: "Флагманский 7-местный кроссовер. Идеален для семьи и длительных путешествий. С мизирным пробегом для этой машины 72000км. В наличии в Дагестане",
-        engine: "2.0 TSI",
-        power: "220 л.с.",
-        type: "Ice",
-        statusText: "В НАЛИЧИИ",
-    statusClass: "badge-available"
-    },
-    {
-        id: 42,
-        brand: "BMW",
-        name: "530Li Performance",
-        status: "в наличии",
-        img:"https://res.cloudinary.com/dqf74sl3y/image/upload/f_auto,q_auto/2705_tjig4r"
-,
-        desc: "Удлиненная версия легендарной 'пятерки' для китайского рынка. Бизнес-класс.С пробегом всего 30000км.! В наличии в Дагестане",
-        engine: "2.0 Turbo",
-        power: "252 л.с.",
-        type: "Ice",
-        statusText: "В НАЛИЧИИ",
-    statusClass: "badge-available"
-    },
-                // AUDI SECTION
+                {
+                    id: 41,
+                    brand: "Volkswagen",
+                    name: "Teramont Exclusive",
+                    status: "в наличии",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/5555838/451e9f1dd0c98aa0ad0757fbd9d2ce5a/1200x900",
+                    desc: "Флагманский 7-местный кроссовер. Идеален для семьи и длительных путешествий. С мизерным пробегом для этой машины 72000км. В наличии в Дагестане",
+                    engine: "2.0 TSI",
+                    power: "220 л.с.",
+                    type: "Ice",
+                    price: "4 300 000",
+                    statusText: "В НАЛИЧИИ",
+                    statusClass: "badge-available"
+                },
+                {
+                    id: 42,
+                    brand: "BMW",
+                    name: "530Li Performance",
+                    status: "в наличии",
+                    img:"https://res.cloudinary.com/dqf74sl3y/image/upload/f_auto,q_auto/2705_tjig4r",
+                    desc: "Удлиненная версия легендарной 'пятерки' для китайского рынка. Бизнес-класс.С пробегом всего 30000км.! В наличии в Дагестане",
+                    engine: "2.0 Turbo",
+                    power: "252 л.с.",
+                    type: "Ice",
+                    price: "5 200 000",
+                    statusText: "В НАЛИЧИИ",
+                    statusClass: "badge-available"
+                },
                 {
                     id: 1,
                     brand: "Audi",
@@ -1144,8 +1316,8 @@
                     engine: "2.0 TFSI (Бензин)",
                     power: "190 л.с.",
                     drive: "Передний привод",
-                    consumption: "6.5 л / 100 км"
-                   
+                    consumption: "6.5 л / 100 км",
+                    price: "4 800 000"
                 },
                 {
                     id: 2,
@@ -1156,7 +1328,8 @@
                     engine: "2.0 TFSI Quattro",
                     power: "245 л.с.",
                     drive: "Полный привод (Quattro)",
-                    consumption: "7.8 л / 100 км"
+                    consumption: "7.8 л / 100 км",
+                    price: "6 500 000"
                 },
                 {
                     id: 3,
@@ -1167,7 +1340,8 @@
                     engine: "2.0 Turbo",
                     power: "249 л.с.",
                     drive: "Полный привод",
-                    consumption: "8.2 л / 100 км"
+                    consumption: "8.2 л / 100 км",
+                    price: "6 800 000"
                 },
                 {
                     id: 4,
@@ -1178,7 +1352,8 @@
                     engine: "3.0 TFSI V6",
                     power: "340 л.с.",
                     drive: "Полный привод",
-                    consumption: "9.5 л / 100 км"
+                    consumption: "9.5 л / 100 км",
+                    price: "11 500 000"
                 },
                 {
                     id: 5,
@@ -1189,10 +1364,9 @@
                     engine: "Dual Electric Motor",
                     power: "646 л.с.",
                     drive: "Полный электрический",
-                    consumption: "0 л (EV)"
+                    consumption: "0 л (EV)",
+                    price: "14 000 000"
                 },
-
-                // BMW SECTION
                 {
                     id: 6,
                     brand: "BMW",
@@ -1202,18 +1376,20 @@
                     engine: "2.0 TwinPower Turbo",
                     power: "258 л.с.",
                     drive: "Задний привод",
-                    consumption: "6.8 л / 100 км"
+                    consumption: "6.8 л / 100 км",
+                    price: "5 400 000"
                 },
                 {
                     id: 7,
                     brand: "BMW",
-                    name: "5 Series (G60) 530i",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/18150448/9f43d48e7a74beadb3b2fb4b0cd9cb22/584x438",
+                    name: "5 Series (G90) 530Li",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/5635384/9f184ed30a332c82853b5f13a45826e8/1200x900",
                     desc: "Новое поколение легендарной «пятерки». Интерактивная светодиодная панель в салоне и новейшая мультимедиа.",
                     engine: "2.0 TwinPower Turbo",
                     power: "252 л.с.",
                     drive: "Полный xDrive",
-                    consumption: "7.1 л / 100 км"
+                    consumption: "7.1 л / 100 км",
+                    price: "8 200 000"
                 },
                 {
                     id: 8,
@@ -1224,7 +1400,8 @@
                     engine: "3.0 Turbo V6",
                     power: "381 л.с.",
                     drive: "Полный xDrive",
-                    consumption: "9.8 л / 100 км"
+                    consumption: "9.8 л / 100 км",
+                    price: "13 800 000"
                 },
                 {
                     id: 9,
@@ -1235,7 +1412,8 @@
                     engine: "Dual Electric Motor",
                     power: "544 л.с.",
                     drive: "Полный xDrive",
-                    consumption: "0 л (EV)"
+                    consumption: "0 л (EV)",
+                    price: "15 500 000"
                 },
                 {
                     id: 10,
@@ -1246,21 +1424,9 @@
                     engine: "4.4 V8 + Plug-in Hybrid",
                     power: "748 л.с.",
                     drive: "Полный M xDrive",
-                    consumption: "1.7 л / 100 км"
+                    consumption: "1.7 л / 100 км",
+                    price: "23 000 000"
                 },
-                {
-                    id: 41,
-                    brand: "BMW",
-                    name: "530Li (Long)",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/16446884/55ad7014a892024da0db5bd7d636c185/1200x900",
-                    desc: "Удлиненная версия бизнес-седана. Премиальные материалы отделки и увеличенное пространство для ног пассажиров второго ряда.",
-                    engine: "2.0 TwinPower Turbo",
-                    power: "252 л.с.",
-                    drive: "Задний / Полный xDrive",
-                    consumption: "7.2 л / 100 км"
-                },
-
-                // MERCEDES SECTION
                 {
                     id: 11,
                     brand: "Mercedes",
@@ -1270,7 +1436,8 @@
                     engine: "1.5 Turbo + MHEV",
                     power: "204 л.с.",
                     drive: "Задний привод",
-                    consumption: "6.2 л / 100 км"
+                    consumption: "6.2 л / 100 км",
+                    price: "5 700 000"
                 },
                 {
                     id: 12,
@@ -1281,7 +1448,8 @@
                     engine: "2.0 Turbo",
                     power: "258 л.с.",
                     drive: "Полный 4MATIC",
-                    consumption: "7.5 л / 100 км"
+                    consumption: "7.5 л / 100 км",
+                    price: "9 300 000"
                 },
                 {
                     id: 13,
@@ -1292,7 +1460,8 @@
                     engine: "3.0 V6 Hybrid",
                     power: "367 л.с.",
                     drive: "Полный 4MATIC",
-                    consumption: "8.9 л / 100 км"
+                    consumption: "8.9 л / 100 км",
+                    price: "17 500 000"
                 },
                 {
                     id: 14,
@@ -1303,10 +1472,9 @@
                     engine: "4.0 V8 BiTurbo",
                     power: "585 л.с.",
                     drive: "Полный 4MATIC",
-                    consumption: "13.2 л / 100 км"
+                    consumption: "13.2 л / 100 км",
+                    price: "28 500 000"
                 },
-
-                // XIAOMI SECTION
                 {
                     id: 15,
                     brand: "Xiaomi",
@@ -1316,21 +1484,9 @@
                     engine: "Single Motor EV 400V",
                     power: "299 л.с.",
                     drive: "Задний привод",
-                    consumption: "0 л (EV)"
+                    consumption: "0 л (EV)",
+                    price: "4 600 000"
                 },
-                {
-                    id: 16,
-                    brand: "Xiaomi",
-                    name: "SU7 Max Founders Edition",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/4034186/3bb658e08d15585da42469cafa36c4ce/1200x900",
-                    desc: "Флагманская версия. Архитектура 800 В, разгон 0-100 за 2.78 сек, тормозная система Brembo, активный спойлер.",
-                    engine: "Dual Motor EV 800V",
-                    power: "673 л.с.",
-                    drive: "Полный привод",
-                    consumption: "0 л (EV)"
-                },
-
-                // ZEEKR SECTION
                 {
                     id: 17,
                     brand: "Zeekr",
@@ -1340,32 +1496,9 @@
                     engine: "Dual Motor EV",
                     power: "544 л.с.",
                     drive: "Полный привод",
-                    consumption: "0 л (EV)"
+                    consumption: "0 л (EV)",
+                    price: "6 300 000"
                 },
-                {
-                    id: 18,
-                    brand: "Zeekr",
-                    name: "007 Performance",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2172345/c3826b4ab57f047b6a16f88e3cf1a542/1200x900",
-                    desc: "Новый седан с дисплеем Zeekr Stargate на передней панели. Разгон 2.84 секунды. Минималистичный салон.",
-                    engine: "Dual Motor EV 800V",
-                    power: "646 л.с.",
-                    drive: "Полный привод",
-                    consumption: "0 л (EV)"
-                },
-                {
-                    id: 19,
-                    brand: "Zeekr",
-                    name: "009 ME Version",
-                    img: "https://avatars.mds.yandex.net/i?id=185dace41812c3e18cc07a18ef8cfcd6_l-12820356-images-thumbs&n=13",
-                    desc: "Роскошный бизнес-вэн. Разгон 4.5 сек до сотни (для минивэна!). Кресла из кожи Nappa, экраны на потолке.",
-                    engine: "Dual Motor EV",
-                    power: "544 л.с.",
-                    drive: "Полный привод",
-                    consumption: "0 л (EV)"
-                },
-
-                // CHANGAN SECTION
                 {
                     id: 20,
                     brand: "Changan",
@@ -1375,32 +1508,9 @@
                     engine: "1.5 Turbo GDI",
                     power: "181 л.с.",
                     drive: "Передний привод",
-                    consumption: "6.2 л / 100 км"
+                    consumption: "6.2 л / 100 км",
+                    price: "2 600 000"
                 },
-                {
-                    id: 21,
-                    brand: "Changan",
-                    name: "UNI-K AWD",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/17890514/06a46c83cb1fc8135316d31f1c57cfaf/1200x900",
-                    desc: "Крупный кроссовер, дизайн которого вдохновлен Porsche Cayenne Coupe. Панорамная крыша, премиум акустика Sony.",
-                    engine: "2.0 Turbo",
-                    power: "226 л.с.",
-                    drive: "Полный привод",
-                    consumption: "8.4 л / 100 км"
-                },
-                {
-                    id: 22,
-                    brand: "Changan",
-                    name: "CS75 Plus",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2196765/b071410b4a8f552651b26b4fcde4aefd/1200x900",
-                    desc: "Классический семейный кроссовер. Надежный японский автомат Aisin, просторный салон, отличное качество сборки.",
-                    engine: "2.0 Turbo",
-                    power: "233 л.с.",
-                    drive: "Передний привод",
-                    consumption: "7.9 л / 100 км"
-                },
-
-                // GEELY SECTION
                 {
                     id: 23,
                     brand: "Geely",
@@ -1410,32 +1520,9 @@
                     engine: "2.0 Turbo (Drive-E)",
                     power: "238 л.с.",
                     drive: "Полный (Haldex 6)",
-                    consumption: "8.5 л / 100 км"
+                    consumption: "8.5 л / 100 км",
+                    price: "4 100 000"
                 },
-                {
-                    id: 24,
-                    brand: "Geely",
-                    name: "Coolray New Generation",
-                    img: "https://avatars.mds.yandex.net/i?id=9524803562fca5877649975a51eb26a7_l-4452215-images-thumbs&n=13",
-                    desc: "Рестайлинг популярного молодежного кроссовера. Теперь с надежным 4-цилиндровым двигателем.",
-                    engine: "1.5 Turbo (4-cyl)",
-                    power: "147 л.с.",
-                    drive: "Передний привод",
-                    consumption: "6.1 л / 100 км"
-                },
-                {
-                    id: 25,
-                    brand: "Geely",
-                    name: "Preface",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/16149001/35c20aeb228b7e10632e20df813f5cfa/1200x900",
-                    desc: "Большой седан D-класса. Строгий европейский дизайн, технологии Volvo, простор для всех пассажиров.",
-                    engine: "2.0 Turbo",
-                    power: "190 л.с.",
-                    drive: "Передний привод",
-                    consumption: "6.8 л / 100 км"
-                },
-
-                // TOYOTA SECTION
                 {
                     id: 26,
                     brand: "Toyota",
@@ -1445,67 +1532,9 @@
                     engine: "2.5 Hybrid System",
                     power: "218 л.с.",
                     drive: "Передний привод",
-                    consumption: "4.8 л / 100 км"
+                    consumption: "4.8 л / 100 км",
+                    price: "4 600 000"
                 },
-                {
-                    id: 27,
-                    brand: "Toyota",
-                    name: "RAV4 Adventure",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/16408920/1bb3f54d359afce107b486e088eb0855/1200x900",
-                    desc: "Самый продаваемый кроссовер в мире. Надежность, неприхотливость, отличная ликвидность на вторичном рынке.",
-                    engine: "2.5 л Atmos",
-                    power: "205 л.с.",
-                    drive: "Полный привод",
-                    consumption: "7.6 л / 100 км"
-                },
-                {
-                    id: 28,
-                    brand: "Toyota",
-                    name: "yaris",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/5966122/33860f77bf2cac10e8828179489caf92/1200x900",
-                    desc: "Toyota Yaris — компактный хэтчбек с хорошими аэродинамическими свойствами, перемещаемым задним сиденьем и отличной обзорностью.",
-                    engine: "1,5",
-                    power: "150 л.с.",
-                    drive: "Передний",
-                    consumption: "3.3 л / 100 км"
-                },
-
-                // BYD SECTION
-                {
-                    id: 29,
-                    brand: "BYD",
-                    name: "Han EV Champion",
-                    img: "https://база.демо.сайт/upload/baza_images/china/109262/byd-han-2025-year-dm-i-125km-comfort-1498-at-2025-7b2bzznlllqo3a-st-1.webp",
-                    desc: "Представительский электроседан. Знаменитая безопасная батарея Blade Battery. Роскошный салон.",
-                    engine: "Dual Motor EV",
-                    power: "517 л.с.",
-                    drive: "Полный привод",
-                    consumption: "0 л (EV)"
-                },
-                {
-                    id: 30,
-                    brand: "BYD",
-                    name: "Seal AWD Performance",
-                    img: "https://avatars.mds.yandex.net/get-autoru-vos/4304177/b9a6361049045e3b535ec75144593524/1200x900",
-                    desc: "Спортивный ответ Tesla Model 3. Инновационная архитектура Cell-to-Body, поворотный экран мультимедиа.",
-                    engine: "Dual Motor EV",
-                    power: "530 л.с.",
-                    drive: "Полный привод",
-                    consumption: "0 л (EV)"
-                },
-                {
-                    id: 31,
-                    brand: "BYD",
-                    name: "Tang DM-p",
-                    img: "https://mobile-review.com/all/wp-content/uploads/2021/11/2021-11-10_12-56-00.jpg",
-                    desc: "Мощный 7-местный подзаряжаемый гибрид (PHEV). Огромный запас хода, разгон до 100 км/ч за 4.3 сек.",
-                    engine: "1.5T + PHEV",
-                    power: "615 л.с.",
-                    drive: "Полный привод",
-                    consumption: "6.5 л / 100 км"
-                },
-
-                // LI AUTO SECTION
                 {
                     id: 32,
                     brand: "Li Auto",
@@ -1515,61 +1544,179 @@
                     engine: "1.5T Range Extender",
                     power: "449 л.с.",
                     drive: "Полный привод",
-                    consumption: "7.1 л / 100 км"
+                    consumption: "7.1 л / 100 км",
+                    price: "6 900 000"
+                },
+                // ДОБАВЛЕННЫЕ МАШИНЫ ДЛЯ РОТНОГО КОЛИЧЕСТВА (36)
+                {
+                    id: 101,
+                    brand: "Changan",
+                    name: "UNI-K",
+                    img: "https://a.d-cd.net/x0BhNfgppJWwRgfllFOPuPTu7wM-1920.jpg",
+                    desc: "Футуристичный кроссовер с эффектной решеткой радиатора и просторным салоном.",
+                    engine: "2.0 Turbo",
+                    power: "226 л.с.",
+                    drive: "Полный привод",
+                    consumption: "8.4 л / 100 км",
+                    price: "3 800 000"
                 },
                 {
-                    id: 33,
+                    id: 102,
+                    brand: "Changan",
+                    name: "CS55 Plus",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/1936147/ca4232917d21ea7bf05b50eb8afa1904/1200x900",
+                    desc: "Компактный и экономичный городской кроссовер с ярким дизайном.",
+                    engine: "1.5 Turbo",
+                    power: "181 л.с.",
+                    drive: "Передний привод",
+                    consumption: "6.9 л / 100 км",
+                    price: "2 700 000"
+                },
+                {
+                    id: 103,
+                    brand: "Zeekr",
+                    name: "X",
+                    img: "https://avatars.mds.yandex.net/i?id=550b12da0a900adf6f5cc79f9a80e392_l-5222263-images-thumbs&n=33&w=1218&h=1218",
+                    desc: "Компактный городской электро-кроссовер с премиальными материалами и экраном-слайдером.",
+                    engine: "Dual Motor EV",
+                    power: "428 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)",
+                    price: "4 200 000"
+                },
+                {
+                    id: 104,
+                    brand: "Zeekr",
+                    name: "009",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/11392373/b88e53c0955335fe2e977486558ea467/1200x900",
+                    desc: "Роскошный минивэн бизнес-класса. Сверхбыстрая зарядка и массажные кресла.",
+                    engine: "Dual Motor EV",
+                    power: "544 л.с.",
+                    drive: "Полный привод",
+                    consumption: "0 л (EV)",
+                    price: "9 500 000"
+                },
+                {
+                    id: 105,
+                    brand: "Geely",
+                    name: "Tugella",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2182833/78af828633e1d9b8a697a1963e87b9e7/1200x900",
+                    desc: "Динамичный купе-кроссовер с проверенным двигателем и отличной управляемостью.",
+                    engine: "2.0 Turbo",
+                    power: "238 л.с.",
+                    drive: "Полный привод",
+                    consumption: "8.1 л / 100 км",
+                    price: "3 900 000"
+                },
+                {
+                    id: 106,
+                    brand: "Geely",
+                    name: "Coolray",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2157594/58c0ad44e73ab80add31e1a5fd6db7fd/1200x900",
+                    desc: "Бестселлер среди компактных кроссоверов. Резвый, экономичный, стильный.",
+                    engine: "1.5 Turbo",
+                    power: "172 л.с.",
+                    drive: "Передний привод",
+                    consumption: "6.4 л / 100 км",
+                    price: "2 400 000"
+                },
+                {
+                    id: 107,
+                    brand: "Toyota",
+                    name: "RAV4",
+                    img: "https://cdnstatic.rg.ru/uploads/images/2025/09/11/2025-09-11_115418_d4f.jpg",
+                    desc: "Легендарная надежность. Практичный выбор для города и легкого бездорожья.",
+                    engine: "2.0 Бензин",
+                    power: "171 л.с.",
+                    drive: "Полный привод",
+                    consumption: "7.0 л / 100 км",
+                    price: "4 100 000"
+                },
+                {
+                    id: 108,
+                    brand: "Toyota",
+                    name: "corolla",
+                    img: "https://avatars.mds.yandex.net/i?id=f075ea7de8adf6d6d6b27d55cd980c2a_l-5131517-images-thumbs&n=13",
+                    desc: "Ультракомпактная Corolla: феноменально маневренный микро-кар. Идеально подходит для тесных городских улиц. Легендарная надежность и легкая парковка.  .",
+                    engine: "1.8 Hybrid",
+                    power: "140 л.с.",
+                    drive: "Передний привод",
+                    consumption: "3.8 л / 100 км",
+                    price: "2 200 000"
+                },
+                {
+                    id: 109,
                     brand: "Li Auto",
-                    name: "L9 Ultra",
-                    img: "https://avatars.mds.yandex.net/i?id=df9ed5559def4f79601e17620c8ab88c_l-12500647-images-thumbs&n=13",
-                    desc: "Безоговорочный лидер рынка. 6 мест, встроенный холодильник, OLED экраны, массаж, подогрев и вентиляция всех кресел.",
+                    name: "L9",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/17714294/ac9498770924e07f052b6e9a7ebc982e/1200x900",
+                    desc: "Флагманский 6-местный кроссовер. Экран для задних пассажиров, холодильник, автопилот.",
                     engine: "1.5T Range Extender",
                     power: "449 л.с.",
                     drive: "Полный привод",
-                    consumption: "7.5 л / 100 км"
-
+                    consumption: "7.8 л / 100 км",
+                    price: "8 200 000"
+                },
+                {
+                    id: 110,
+                    brand: "Li Auto",
+                    name: "L6 Max",
+                    img: "https://avatars.mds.yandex.net/i?id=b2348a5bff6255f915c48d8d25ae171e_l-5209934-images-thumbs&n=13",
+                    desc: "Золотая середина. 5 мест, высочайший комфорт и передовые технологии безопасности.",
+                    engine: "1.5T Range Extender",
+                    power: "510 л.с.",
+                    drive: "Полный привод",
+                    consumption: "7.5 л / 100 км",
+                    price: "7 500 000"
+                },
+                {
+                    id: 111,
+                    brand: "Mercedes",
+                    name: "GLE 450 4MATIC",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/5244762/6a884701b7f30a2e8edd6247ec9f8dbc/1200x900",
+                    desc: "Универсальный премиальный кроссовер. Пневмоподвеска и роскошный интерьер.",
+                    engine: "3.0 Turbo Hybrid",
+                    power: "367 л.с.",
+                    drive: "Полный 4MATIC",
+                    consumption: "8.6 л / 100 км",
+                    price: "12 500 000"
+                },
+                {
+                    id: 112,
+                    brand: "Mercedes",
+                    name: "GLC 300 4MATIC",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2163591/e0b2c5501838918416ba9bca3e3c56ee/1200x900",
+                    desc: "Новое поколение самого популярного кроссовера Mercedes. Плавность хода и динамика.",
+                    engine: "2.0 Turbo",
+                    power: "258 л.с.",
+                    drive: "Полный 4MATIC",
+                    consumption: "7.3 л / 100 км",
+                    price: "8 000 000"
+                },
+                {
+                    id: 113,
+                    brand: "BMW",
+                    name: "X7 xDrive40i",
+                    img: "https://avatars.mds.yandex.net/get-autoru-vos/2089254/1bceb0c6c2d7fbb9b477797d59616261/1200x900",
+                    desc: "Огромный, роскошный и технологичный. 7-местный внедорожник с новым «лицом» BMW.",
+                    engine: "3.0 Turbo V6",
+                    power: "381 л.с.",
+                    drive: "Полный xDrive",
+                    consumption: "9.6 л / 100 км",
+                    price: "14 800 000"
+                },
+                {
+                    id: 114,
+                    brand: "Audi",
+                    name: "Q8 55 TFSI",
+                    img: "https://avatars.mds.yandex.net/i?id=0d3801a54a0c091dd9971cedf0be572f_l-4351283-images-thumbs&n=13",
+                    desc: "Агрессивный купе-кроссовер с безрамочными дверями и спортивным характером.",
+                    engine: "3.0 Turbo V6",
+                    power: "340 л.с.",
+                    drive: "Полный привод",
+                    consumption: "8.9 л / 100 км",
+                    price: "13 200 000"
                 }
             ];
-
-            /* * ---------------------------------------------------------
-             * MASS DATABASE GENERATOR
-             * ---------------------------------------------------------
-             */
-const generateFullDatabase = () => {
-    const colors = ['White', 'Black', 'Grey', 'Blue', 'Red Edition', 'Matte Grey'];
-    const trims = ['Premium', 'Luxury', 'Sport', 'Exclusive', 'Ultimate', 'Founders'];
-
-    let targetLength = 36;
-    let originalCount = 15; // Укажи здесь точное число машин, которые ты прописал вручную
-    let attempts = 36;
-
-    while (carDatabase.length < targetLength && attempts < 2000) {
-        attempts++;
-        let newName = `${baseCar.brand} ${rTrim} (${rColor})`;
-
-        // Проверка на дубликаты
-        const isDuplicate = carDatabase.some(car => car.name === newName);
-
-        if (!isDuplicate) {
-            let newCar = JSON.parse(JSON.stringify(baseCar));
-            newCar.id = carDatabase.length + 1;
-            newCar.name = newName;
-            newCar.desc = `Лимитированная версия ${rTrim}. ` + baseCar.desc;
-            
-            // ЛОГИКА ЦВЕТНЫХ СТАТУСОВ
-            const isAvailable = Math.random() > 0.5; // 50% шанс
-            newCar.statusText = isAvailable ? 'В НАЛИЧИИ' : 'ПОД ЗАКАЗ';
-            newCar.statusClass = isAvailable ? 'badge-available' : 'badge-order';
-
-            newCar.image = `img/${Math.floor(Math.random() * 20) + 1}.jpg`; 
-
-            carDatabase.push(newCar);
-        }
-        currentIndex++; // если ты используешь currentIndex
-    } 
-}; 
-
-generateFullDatabase();
 
             /* * ---------------------------------------------------------
              * DOM ELEMENTS SELECTORS
@@ -1587,6 +1734,9 @@ generateFullDatabase();
                 catalogSec: document.getElementById('catalogSection'),
                 catalogGrid: document.getElementById('catalogGrid'),
                 
+                brandFilters: document.getElementById('brandFilters'),
+                toggleFiltersBtn: document.getElementById('toggleFiltersBtn'),
+
                 btnHeaderCatalog: document.getElementById('headerCatalogBtn'),
                 btnHeroReq: document.getElementById('heroReqBtn'),
                 btnHeroCatalog: document.getElementById('heroCatalogBtn'),
@@ -1642,12 +1792,14 @@ generateFullDatabase();
                     if(els.stagesSec) els.stagesSec.style.display = 'none';
                     if(els.faqSec) els.faqSec.style.display = 'none';
                     els.catalogSec.style.display = 'block';
-                    renderCatalog(true);
+                    
+                    els.brandFilters.classList.add('is-active'); // Сразу показываем панель фильтров
+                    renderBrandButtons();
+                    renderCatalog('all'); 
                     window.scrollTo(0, 0);
                     isCatalogOpen = true;
                 } else {
                     if (isCatalogOpen) {
-                        // Возврат на главную
                         els.heroSec.style.display = 'flex';
                         if(els.stagesSec) els.stagesSec.style.display = 'block';
                         if(els.faqSec) els.faqSec.style.display = 'block';
@@ -1655,12 +1807,14 @@ generateFullDatabase();
                         window.scrollTo(0, 0);
                         isCatalogOpen = false;
                     } else {
-                        // Открытие каталога
                         els.heroSec.style.display = 'none';
                         if(els.stagesSec) els.stagesSec.style.display = 'none';
                         if(els.faqSec) els.faqSec.style.display = 'none';
                         els.catalogSec.style.display = 'block';
-                        renderCatalog(true);
+                        
+                        els.brandFilters.classList.add('is-active'); // Сразу показываем панель фильтров
+                        renderBrandButtons();
+                        renderCatalog('all');
                         window.scrollTo(0, 0);
                         isCatalogOpen = true;
                     }
@@ -1668,25 +1822,57 @@ generateFullDatabase();
             };
 
             /* * ---------------------------------------------------------
-             * RENDER FUNCTIONS
+             * NEW: BRAND FILTER FUNCTIONS
              * ---------------------------------------------------------
              */
-            const renderCatalog = (isFullList) => {
+            const renderBrandButtons = () => {
+                // Извлекаем уникальные марки из базы
+                const brands = ['all', ...new Set(carDatabase.map(car => car.brand))];
+                els.brandFilters.innerHTML = '';
+
+                brands.forEach(brand => {
+                    const btn = document.createElement('button');
+                    btn.className = `filter-btn ${brand === 'all' ? 'active' : ''}`;
+                    btn.textContent = brand === 'all' ? 'Все марки' : brand;
+                    
+                    btn.onclick = () => {
+                        // Меняем активную кнопку
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        // Рендерим отфильтрованный каталог
+                        renderCatalog(brand);
+                    };
+                    els.brandFilters.appendChild(btn);
+                });
+            };
+
+            els.toggleFiltersBtn.onclick = () => {
+                els.brandFilters.classList.toggle('is-active');
+            };
+
+            /* * ---------------------------------------------------------
+             * RENDER FUNCTIONS 
+             * ---------------------------------------------------------
+             */
+            const renderCatalog = (brandFilter = 'all') => {
                 els.catalogGrid.innerHTML = '';
                 
-                const shuffled = [...carDatabase].sort(() => 0.5 - Math.random());
-                const listToRender = isFullList ? carDatabase : shuffled.slice(0, 10);
+                // Фильтруем базу по марке
+                let listToRender = brandFilter === 'all' 
+                    ? carDatabase 
+                    : carDatabase.filter(car => car.brand === brandFilter);
                 
                 listToRender.forEach(car => {
+                    const priceDisplay = car.price ? `${car.price} ₽` : 'Цена по запросу';
                     const cardHtml = `
                         <div class="card reveal" data-car-id="${car.id}">
                             <div class="card__image-wrapper">
                                 <span class="badge ${car.statusClass || 'badge-order'}">${car.statusText || 'ПОД ЗАКАЗ'}</span>
-
                                 <img src="${car.img}" alt="${car.name}" class="card__image" loading="lazy">
                             </div>
                             <div class="card__body">
                                 <h3 class="card__title">${car.name}</h3>
+                                <div class="card__price">${priceDisplay}</div>
                                 <p class="card__desc">${car.desc}</p>
                                 <button class="btn btn--outline btn--block js-open-car">
                                     Рассчитать утиль
@@ -1697,6 +1883,7 @@ generateFullDatabase();
                     els.catalogGrid.insertAdjacentHTML('beforeend', cardHtml);
                 });
                 
+                // Применяем анимацию появления к новым карточкам
                 setTimeout(() => {
                     document.querySelectorAll('.catalog .reveal').forEach(el => observer.observe(el));
                 }, 100);
@@ -1706,28 +1893,30 @@ generateFullDatabase();
                 const car = carDatabase.find(c => c.id === parseInt(carId));
                 if (!car) return;
                 
+                const priceDisplay = car.price ? `${car.price} ₽` : 'Цена по запросу';
                 const content = document.getElementById('carDetailContent');
                 content.innerHTML = `
                     <img src="${car.img}" style="width:100%; height:350px; object-fit:cover; border-radius: 20px; margin-bottom: 30px;">
                     <h2 class="modal__title" style="font-size: 2.5rem;">${car.name}</h2>
+                    <div class="modal__price">${priceDisplay}</div>
                     <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">${car.desc}</p>
                     
                     <div class="specs-grid">
                         <div class="spec-item">
                             <span class="spec-item__label">Двигатель</span>
-                            <span class="spec-item__value">${car.engine}</span>
+                            <span class="spec-item__value">${car.engine || '-'}</span>
                         </div>
                         <div class="spec-item">
                             <span class="spec-item__label">Мощность</span>
-                            <span class="spec-item__value">${car.power}</span>
+                            <span class="spec-item__value">${car.power || '-'}</span>
                         </div>
                         <div class="spec-item">
                             <span class="spec-item__label">Тип привода</span>
-                            <span class="spec-item__value">${car.drive}</span>
+                            <span class="spec-item__value">${car.drive || '-'}</span>
                         </div>
                         <div class="spec-item">
-                            <span class="spec-item__label">Расход топлива (смешанный)</span>
-                            <span class="spec-item__value">${car.consumption}</span>
+                            <span class="spec-item__label">Расход топлива</span>
+                            <span class="spec-item__value">${car.consumption || '-'}</span>
                         </div>
                     </div>
                     
@@ -1743,13 +1932,11 @@ generateFullDatabase();
              * EVENT LISTENERS BINDING
              * ---------------------------------------------------------
              */
-             
-            // Header / Menu
             els.burger.addEventListener('click', toggleSidebar);
             els.sidebarClose.addEventListener('click', closeSidebar);
             els.overlay.addEventListener('click', closeSidebar);
             
-            // Navigation
+            // Запуск каталога и авто-открытие фильтров
             els.btnHeaderCatalog.addEventListener('click', () => toggleCatalogView(false));
             els.btnHeroCatalog.addEventListener('click', () => toggleCatalogView(true));
             els.navCatalog.addEventListener('click', (e) => { e.preventDefault(); toggleCatalogView(true); closeSidebar(); });
@@ -1758,7 +1945,6 @@ generateFullDatabase();
             els.navReq.addEventListener('click', (e) => { e.preventDefault(); openModal(els.modalReq); });
             els.navCalc.addEventListener('click', (e) => { e.preventDefault(); openModal(els.modalCalc); });
             
-            // Close Modals
             document.querySelectorAll('[data-close]').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const modalId = this.getAttribute('data-close');
@@ -1766,14 +1952,12 @@ generateFullDatabase();
                 });
             });
             
-            // Close modal on outside click
             window.addEventListener('click', (e) => {
                 if (e.target.classList.contains('modal')) {
                     closeModal(e.target);
                 }
             });
             
-            // Event Delegation for dynamic elements
             document.body.addEventListener('click', (e) => {
                 const card = e.target.closest('.card');
                 if (card) {
@@ -1788,211 +1972,77 @@ generateFullDatabase();
             });
 
             /* * ---------------------------------------------------------
-             * CALCULATOR LOGIC (2026 RATES)
+             * CALCULATOR LOGIC
              * ---------------------------------------------------------
              */
-
-const utilRates2026 = {
-    to2: {
-        "0-3": [
-            {limit: 187, fee: 900000},
-            {limit: 216, fee: 952800},
-            {limit: 246, fee: 1010400},
-            {limit: 275, fee: 1142400},
-            {limit: 305, fee: 1291200},
-            {limit: 335, fee: 1459000},
-            {limit: 365, fee: 1663200},
-            {limit: 394, fee: 1896000},
-            {limit: 424, fee: 2160000},
-            {limit: 453, fee: 2462800},
-            {limit: 493, fee: 2808000},
-            {limit: 9999, fee: 3201600}
-        ],
-        "3-5": [
-            {limit: 187, fee: 1492800},
-            {limit: 216, fee: 1584000},
-            {limit: 246, fee: 1677600},
-            {limit: 278, fee: 1878400},
-            {limit: 305, fee: 2011200},
-            {limit: 335, fee: 2203000},
-            {limit: 364, fee: 2412000},
-            {limit: 394, fee: 2640000},
-            {limit: 424, fee: 2892000},
-            {limit: 453, fee: 3168000},
-            {limit: 493, fee: 3468000},
-            {limit: 9999, fee: 3796800}
-        ]
-    },
-    to3: {
-        "0-3": [
-            {limit: 187, fee: 2308800},
-            {limit: 216, fee: 2402400},
-            {limit: 246, fee: 2520000},
-            {limit: 9999, fee: 3448800}
-        ],
-        "3-5": [
-            {limit: 187, fee: 3456000},
-            {limit: 216, fee: 3501600},
-            {limit: 246, fee: 3552000},
-            {limit: 9999, fee: 4572000}
-        ]
-    },
-    to3_5: {
-        "0-3": [
-            {limit: 187, fee: 2635200},
-            {limit: 216, fee: 2685600},
-            {limit: 246, fee: 2743200},
-            {limit: 275, fee: 2810400},
-            {limit: 305, fee: 2880000},
-            {limit: 335, fee: 3038400},
-            {limit: 364, fee: 3206400},
-            {limit: 394, fee: 3384000},
-            {limit: 423, fee: 3568800},
-            {limit: 453, fee: 3765600},
-            {limit: 492, fee: 3972000},
-            {limit: 9999, fee: 4190400}
-        ],
-        "3-5": [
-            {limit: 187, fee: 4000800},
-            {limit: 216, fee: 4044000},
-            {limit: 246, fee: 4092000},
-            {limit: 275, fee: 4144800},
-            {limit: 305, fee: 4248000},
-            {limit: 335, fee: 4356000},
-            {limit: 364, fee: 4485600},
-            {limit: 394, fee: 4620000},
-            {limit: 423, fee: 4759200},
-            {limit: 453, fee: 4905600},
-            {limit: 492, fee: 5049600},
-            {limit: 9999, fee: 5230800}
-        ]
-    },
-    over3_5: {
-        "0-3": [
-            {limit: 187, fee: 3345600},
-            {limit: 216, fee: 3403200},
-            {limit: 246, fee: 3460800},
-            {limit: 275, fee: 3530400},
-            {limit: 305, fee: 3600000},
-            {limit: 335, fee: 3727200},
-            {limit: 364, fee: 3857200},
-            {limit: 394, fee: 3993600},
-            {limit: 423, fee: 4132800},
-            {limit: 453, fee: 4276800},
-            {limit: 492, fee: 4425600},
-            {limit: 9999, fee: 4581600}
-        ],
-        "3-5": [
-            {limit: 187, fee: 4389600},
-            {limit: 216, fee: 4456800},
-            {limit: 246, fee: 4524000},
-            {limit: 275, fee: 4627200},
-            {limit: 305, fee: 4732800},
-            {limit: 335, fee: 4992000},
-            {limit: 364, fee: 5258000},
-            {limit: 394, fee: 5558400},
-            {limit: 423, fee: 5863200},
-            {limit: 453, fee: 6187200},
-            {limit: 492, fee: 6520800},
-            {limit: 9999, fee: 6885600}
-        ]
-    }
-};
+            /* * ---------------------------------------------------------
+             * CALCULATOR LOGIC (ФИНАЛЬНАЯ ВЕРСИЯ ПО ТВОЕЙ ТАБЛИЦЕ)
+             * ---------------------------------------------------------
+             */
             els.runCalcBtn.addEventListener('click', () => {
-                const age = document.getElementById('calcAge').value;
-                const vol = document.getElementById('calcVol').value;
                 const pwrInput = document.getElementById('calcPwr').value;
+                const vol = document.getElementById('calcVol').value;
+                const age = document.getElementById('calcAge').value;
                 const resultBlock = document.getElementById('calcResult');
                 
-                const pwr = parseInt(pwrInput);
-                
-                if (!pwr || isNaN(pwr) || pwr <= 160) {
-                    document.getElementById('calcPwr').focus();
+                const pwr = parseFloat(pwrInput);
+
+                if (!pwr || isNaN(pwr)) {
+                    alert("Пожалуйста, введите мощность двигателя");
                     return;
                 }
                 
-                const rateArray = utilRates2026[vol][age];
-                let finalFee = rateArray[rateArray.length - 1].fee; 
+                let finalFee = 0;
                 
-                for (let i = 0; i < rateArray.length; i++) {
-                    if (pwr <= rateArray[i].limit) {
-                        finalFee = rateArray[i].fee;
-                        break;
+                // Проверяем наличие данных в utylData
+                if (utylData[vol] && utylData[vol][age]) {
+                    const table = utylData[vol][age];
+                    
+                    // Ищем первый лимит, который больше или равен введенной мощности
+                    // Используем find, так как твои лимиты идут по возрастанию
+                    const match = table.find(item => pwr <= item.limit);
+                    
+                    if (match) {
+                        finalFee = match.fee;
+                    } else {
+                        // Если мощность выше самого большого лимита, берем последнее значение (9999)
+                        finalFee = table[table.length - 1].fee;
                     }
                 }
-                
-                let startTimestamp = null;
-                const duration = 800; 
-                
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const easeProgress = 1 - Math.pow(1 - progress, 4);
-                    
-                    const currentVal = Math.floor(finalFee * easeProgress);
-                    resultBlock.innerText = currentVal.toLocaleString('ru-RU') + " ₽";
-                    
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    } else {
-                        resultBlock.innerText = finalFee.toLocaleString('ru-RU') + " ₽";
-                    }
-                };
-                
-                window.requestAnimationFrame(step);
+
+                if (finalFee > 0) {
+                    resultBlock.innerText = finalFee.toLocaleString('ru-RU') + " ₽";
+                } else {
+                    resultBlock.innerText = "Ошибка данных";
+                }
             });
 
+
             /* * ---------------------------------------------------------
-             * FORM SUBMISSION (TELEGRAM REDIRECT)
+             * FORM SUBMISSION
              * ---------------------------------------------------------
              */
             els.requestForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                
-                const name = document.getElementById('reqName').value.trim();
-                const phone = document.getElementById('reqPhone').value.trim();
-                const text = document.getElementById('reqText').value.trim();
-                
-                let message = `👋 Новая заявка с сайта IMPORT AUTO\n\n`;
-                message += `👤 Имя: ${name}\n`;
-                message += `📞 Телефон: ${phone}\n`;
-                if (text) {
-                    message += `💬 Интересует: ${text}\n`;
-                }
-                
-                const encodedMessage = encodeURIComponent(message);
-                const telegramUrl = `https://t.me/Daster711?text=${encodedMessage}`;
-                
-                window.open(telegramUrl, '_blank');
-                
+                alert('Заявка успешно отправлена! (Имитация)');
                 els.requestForm.reset();
                 closeModal(els.modalReq);
             });
 
             /* * ---------------------------------------------------------
-             * INTERSECTION OBSERVER (SCROLL ANIMATIONS)
+             * INTERSECTION OBSERVER
              * ---------------------------------------------------------
              */
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, obs) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.15 });
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            /* * ---------------------------------------------------------
-             * INIT APP
-             * ---------------------------------------------------------
-             */
             els.catalogSec.style.display = 'none'; 
         });
     </script>
